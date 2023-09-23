@@ -15,7 +15,6 @@ function App() {
 
 const login = useSelector((state) => state.login)
 const dispatch = useDispatch();
-console.log(login.login);
 
   return (
     <>
@@ -27,7 +26,7 @@ console.log(login.login);
         </div>
         <Nav className="navigation">
           <Link className="link" to="/">HOME</Link>
-          <Link className="link" to="/collect-cards"> COLLECT CARDS</Link>
+          {login.login && <Link className="link" to="/collect-cards"> COLLECT CARDS</Link>}
           <button className="link" onClick={() => {dispatch(changeLogin(!login.login))}}>CAMBIAR LOGIN</button>
         </Nav>
         <div className="dropdown">
@@ -35,9 +34,9 @@ console.log(login.login);
           Dropdown button
           </button>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="#">Action</a>
-            <a className="dropdown-item" href="#">Another action</a>
-            <a className="dropdown-item" href="#">Something else here</a>
+            <li className="dropdown-item">Action</li>
+            <li className="dropdown-item">Action</li>
+            <li className="dropdown-item">Action</li>
           </div>
         </div>
       </Container>
@@ -48,7 +47,7 @@ console.log(login.login);
     </div>}
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/fight" element={<CollectCards />}/>
+      <Route path="/collect-cards" element={<CollectCards />}/>
       <Route path="/account" element={<Account />}/>
     </Routes>
   </>
