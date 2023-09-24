@@ -1,7 +1,9 @@
 import { changeModal } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Form from "./Form";
+import { useState } from "react";
+import LogInForm from "./LogInForm";
+import SignInForm from "./SignInForm"
 
 const Modal = (props) => {   
 
@@ -15,7 +17,8 @@ const Modal = (props) => {
                 <div className="closebutton">
                 <button onClick={() => {dispatch(changeModal(!login.modal))}}>X</button>
                 </div>
-                <Form tipo={props.tipo}/>
+                {props.tipo === "login" && <LogInForm />}
+                {props.tipo === "signin" && <SignInForm />}
                 <h1>{props.message}</h1>
             </div>
         </div>  

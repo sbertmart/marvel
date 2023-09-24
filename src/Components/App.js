@@ -1,6 +1,4 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Admin from "../Components/Admin";
 import logo from '../img/Marvel_Logo.svg';
 import {Route, Routes, Link} from 'react-router-dom';
 import Account from "../Pages/Account";
@@ -9,7 +7,7 @@ import Home from '../Pages/Home.js'
 import CollectCards from '../Pages/CollectCards.js'
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
-import { changeLogin, changeModal } from "../redux/userSlice";
+import { changeLogin } from "../redux/userSlice";
 import { useEffect } from "react"
 import CharacterDetails from '../Pages/CharacterDetails';
 
@@ -33,14 +31,13 @@ const dispatch = useDispatch();
 
 
 useEffect(() => {
-  if(logged.userName) {
+  if(logged.username) {
     dispatch(changeLogin(true));}
   }
   )
 
   return (
     <>
-    <body>
     <div className="menu-container">
       <div className="menu">
         <div className="logomenu">
@@ -50,20 +47,21 @@ useEffect(() => {
         <div className="navigation">
           <Link className="link" to="/">HOME</Link>
           {login.login && <Link className="link" to="/database"> ACCESS DATABASE</Link>}
+          <Link className="link adminonly" to="/admin">ADMIN ONLY</Link>
         </div>
       </div>
     </div> 
   
     {login.login && <div className="accountmenu">
-          <p className="loggin pt-2 pb-2"><b>Welcome {logged.userName}</b>, <Link to="/account">Access your account</Link></p>    
+          <p className="loggin pt-2 pb-2"><b>Welcome {logged.username}</b>, <Link to="/account">Access your account</Link></p>    
     </div>}
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/database" element={<CollectCards />}/>
       <Route path="/account" element={<Account logged={logged} />}/>
       <Route path="/:id" element={<CharacterDetails />}/>
+      <Route path="/admin" element={<Admin />}/>
     </Routes>
-    </body>
   </>
   );
 }

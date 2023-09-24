@@ -327,6 +327,64 @@ color:rgb(53, 137, 53);
 
     }
 
+    .adminonly {
+      text-transform:lowercase;
+      text-decoration:underline;
+    }
+
+    .admin-area {
+      width:70%;
+      margin:0 auto;
+    }
+
+    .admin-button {
+      background-color:black;
+      color:white;
+      border:none;
+      font-weight:700;
+      padding:8px 15px 8px 15px;
+      border-radius:5px;
+      width:auto!important;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+
+    .deletebutton {
+      background-color:#EC1D24;
+      padding:1% 25% 1% 25%;
+      color:white;
+      border:none;
+      font-size:25px;
+      font-weight:700;
+      border-radius:10%;
+
+    }
+
+   .admintable th {
+
+    padding:15px 25px 15px 25px; 
+    text-align:left!important;
+    border-bottom:2px solid black;
+
+   }
+
+   .admintable td {
+
+    padding:15px 25px 15px 25px; 
+    text-align:left!important;
+    border-bottom:1px solid grey;
+
+   }
+
+   .admintable .thusername {
+    min-width:50vw;
+   }
+
+   .signfirst {
+    font-size:25px;
+    text-align:center;
+   }
+
   /* media queries */
 
   @media (max-width:850px) {
@@ -462,6 +520,12 @@ color:rgb(53, 137, 53);
     border-radius: 25px;
     background-color:white;
     padding:20px;
+    margin:0 auto;
+  }
+
+  
+  .admin-area {
+    width:90%;
     margin:0 auto;
   }
 

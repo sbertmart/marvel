@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     login: false,
     modal: false,
+    admin: false,
 };
 
 export const userSlice = createSlice({
@@ -14,10 +15,13 @@ export const userSlice = createSlice({
         },
         changeModal: (state, action) => {
             state.modal = action.payload;
+        },
+        changeAdmin: (state, action) => {
+            state.admin = action.payload;
         }
       
     }
 });
 
-export const {changeLogin, changeModal} = userSlice.actions;
+export const {changeLogin, changeModal, changeAdmin } = userSlice.actions;
 export default userSlice.reducer;
