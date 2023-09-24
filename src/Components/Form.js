@@ -1,20 +1,23 @@
 import {useState,useEffect} from "react"
 
+
 const Form = (props) => {
 
-    const getDataFromLS = () => {
-        const data = localStorage.getItem("users");
+    const getDataFromLS = (id) => {
+        const data = localStorage.getItem(id);
         if(data) {return JSON.parse(data);
         } else {
             return []
         }
         };
-    const [users, setUsers] = useState(getDataFromLS);
+
+    const [users, setUsers] = useState(getDataFromLS("users"));
     
     const [userName, setUserName] = useState("");
     const [userPassword, setUserPassword] = useState("")
     const [passError, setPassError] = useState(false);
     const [logIn, setLogIn] = useState(false);
+    const [logged, setLogged] = useState(getDataFromLS("logged"))
 
 
     const handleLogIn = (e) => {
@@ -24,8 +27,12 @@ const Form = (props) => {
             userPassword
         }
         const found = users.filter(signed => signed.userName === user.userName && signed.userPassword === user.userPassword);
-        console.log(found);
         setLogIn(found.length > -1);
+
+        if(logIn) {
+            setLogged(user);
+            localStorage.setItem("logged", JSON.stringify(logged));
+        }
 
     }
 
@@ -39,18 +46,28 @@ const Form = (props) => {
         setLogIn(userPassword.length >= 5)
         if (passError === false) {
         setUsers([...users,user])};
+        setLogged(user);
+        localStorage.setItem("logged", JSON.stringify(logged));
     }
     
     useEffect(() => {
 
     localStorage.setItem("users", JSON.stringify(users));
     },[users])
+
+    useEffect(()  => {
+
+    localStorage.setItem("logged", JSON.stringify(logged));
+    })
+
+
     
     return (
         <div>
             {props.tipo === "login" &&
             <div>
                 <form className="form" onSubmit={handleLogIn}>
+                    <h3>Log in</h3>
                     <label>Username</label>
                     <input name="username" value={userName} type="text" onChange={(e)=>{setUserName(e.target.value)}}></input>
                     <label>Password</label>
@@ -66,6 +83,7 @@ const Form = (props) => {
             {props.tipo === "signin" &&
             <div>
                 <form className="form" onSubmit={handleSignIn}>
+                    <h3>Sign in</h3>
                     <label>Username</label>
                     <input name="username" value={userName} type="text" onChange={(e)=>{setUserName(e.target.value)}}></input>
                     <label>Password</label>

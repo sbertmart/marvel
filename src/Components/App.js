@@ -9,47 +9,61 @@ import Home from '../Pages/Home.js'
 import CollectCards from '../Pages/CollectCards.js'
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
-import { changeLogin } from "../redux/userSlice";
+import { changeLogin, changeModal } from "../redux/userSlice";
+import { useEffect } from "react"
+import CharacterDetails from '../Pages/CharacterDetails';
 
 function App() {
+
+
+const getDataFromLS = () => {
+    const data = localStorage.getItem("logged");
+    if(data) {return JSON.parse(data);
+    } else {
+        return []
+    }
+    };
+
+const logged = getDataFromLS(); 
+
 
 const login = useSelector((state) => state.login)
 const dispatch = useDispatch();
 
+
+
+useEffect(() => {
+  if(logged.userName) {
+    dispatch(changeLogin(true));}
+  }
+  )
+
   return (
     <>
-    <Navbar className="menu">
-      <Container className="d-flex align-items-end justify-content-between">
-        <div className="d-flex logomenu">
-        <Navbar.Brand href="#home"><img src={logo} width="150"></img></Navbar.Brand>
+    <body>
+    <div className="menu-container">
+      <div className="menu">
+        <div className="logomenu">
+        <div href="#home"><img src={logo} width="150"></img></div>
         <div className="brand">data cards</div>
         </div>
-        <Nav className="navigation">
+        <div className="navigation">
           <Link className="link" to="/">HOME</Link>
-          {login.login && <Link className="link" to="/collect-cards"> COLLECT CARDS</Link>}
-          <button className="link" onClick={() => {dispatch(changeLogin(!login.login))}}>CAMBIAR LOGIN</button>
-        </Nav>
-        <div className="dropdown">
-          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown button
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li className="dropdown-item">Action</li>
-            <li className="dropdown-item">Action</li>
-            <li className="dropdown-item">Action</li>
-          </div>
+          {login.login && <Link className="link" to="/database"> ACCESS DATABASE</Link>}
         </div>
-      </Container>
-    </Navbar> 
+      </div>
+    </div> 
   
     {login.login && <div className="accountmenu">
-          <p className="loggin pt-2 pb-2"><b>Bienvenido Sergi</b>, <Link to="/account">Accede a tu cuenta</Link></p>    
+          <p className="loggin pt-2 pb-2"><b>Welcome {logged.userName}</b>, <Link to="/account">Access your account</Link></p>    
     </div>}
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/collect-cards" element={<CollectCards />}/>
-      <Route path="/account" element={<Account />}/>
+      <Route path="/database" element={<CollectCards />}/>
+      <Route path="/account" element={<Account logged={logged} />}/>
+      <Route path="/:id" element={<CharacterDetails />}/>
     </Routes>
+    </body>
   </>
   );
 }

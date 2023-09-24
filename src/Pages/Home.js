@@ -37,19 +37,18 @@ const Home = () => {
                 <div className="brand">
                     data cards
                 </div>
-                    <div className="botoneslogin d-flex mt-4">
+                    <div className="botoneslogin mt-4">
                         <div>
-                        <button onClick={() => {triggerModal("login")}}>Already a member? Log In</button>
-                        {login.login && clicked &&
-                        <p className="success"> You are already logged in</p>}
+                        {!login.login && <button onClick={() => {triggerModal("login")}}>Already a member? Log In</button>}
+                    
                         </div>
                         <div>
-                        <button onClick={() => {triggerModal("signin")}}>Not a memeber yet? Sign In</button>
+                        {!login.login && <button onClick={() => {triggerModal("signin")}}>Not a member yet? Sign In</button>}
                     </div>
                 </div>
                 {login.login &&
                 <div className="start mt-4">
-                <Link to="/collect-cards"><button>Start collecting cards</button></Link>
+                <Link className="mainbutton" to="/database"><button>ACCESS DATABASE</button></Link>
                 </div>}
                 </div>
             </div>
