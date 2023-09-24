@@ -43,7 +43,7 @@ const Home = () => {
                     
                         </div>
                         <div>
-                        {!login.login && <button onClick={() => {triggerModal("signin")}}>Not a member yet? Sign In</button>}
+                        {!login.login && <button onClick={() => {triggerModal("signin")}}>Not a member yet? Sign Up</button>}
                     </div>
                 </div>
                 {login.login &&

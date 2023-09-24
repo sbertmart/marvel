@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import LogInForm from "./LogInForm";
-import SignInForm from "./SignInForm"
+import SignUpForm from "./SignUpForm"
 
 const Modal = (props) => {   
 
@@ -18,7 +18,7 @@ const Modal = (props) => {
                 <button onClick={() => {dispatch(changeModal(!login.modal))}}>X</button>
                 </div>
                 {props.tipo === "login" && <LogInForm />}
-                {props.tipo === "signin" && <SignInForm />}
+                {props.tipo === "signin" && <SignUpForm />}
                 <h1>{props.message}</h1>
             </div>
         </div>  

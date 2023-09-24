@@ -83,12 +83,12 @@ const SignInForm = () => {
    
             <div>
                 <form className="form">
-                    <h3>Sign in</h3>
+                    <h3>Sign up</h3>
                     <label>Username</label>
                     <input name="username" onChange={getData} type="text"></input>
                     <label>Password</label>
                     <input name="password" type="password" onChange={getData} ></input>
-                    <input className="submit" type="submit" value="Sign In" onClick={addData}></input>
+                    <input className="submit" type="submit" value="Sign Up" onClick={addData}></input>
                     {passError && <div className="alert">
                         <h3>The password must be at least 5 character long</h3>
                     </div>}
