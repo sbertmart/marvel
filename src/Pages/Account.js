@@ -14,14 +14,14 @@ const Account = (props) => {
     }
 
     return (
-        <div className="row d-flex justify-content-center">
-            <div className="col-6 mt-4 mb-4 px-4 py-4">
+        <div className="account-container mt-4 d-flex justify-content-center">
+            <div className="account">
                 
                 <h2>Your Account</h2>
                 <p>Username: {props.logged.userName}</p>
-                <div className="d-block">
-                <Link to="/"><button className="submit" onClick={logOut}>Log Out</button></Link>
-                <Link to="/database"><button className="submit">Access the database</button></Link>
+                <div>
+                <Link to="/"><button className="submit3" onClick={logOut}>Log Out</button></Link><br />
+                <Link to="/database"><button className="submit3">Access the database</button></Link>
                 </div>
             </div>
         </div>

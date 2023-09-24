@@ -18,7 +18,7 @@ const Search = (props) => {
     }
 
     return (
-        <form className="col-5 d-block justify-content-center form2">
+        <form className="d-block form2">
             <input type="text" placeholder="Search by character name" ref={input} />
             <button className="submit2" onClick={handleClick}>Search</button>
 

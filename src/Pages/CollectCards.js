@@ -25,11 +25,11 @@ const CollectCards = () => {
 
     return (
 
-        <div className="mt-4 row d-flex justify-content-center">
+        <div className="row mt-4 d-flex justify-content-center">
         <h1 className="text-center mb-4">Access the database</h1>
         <Search setter={setHeroes}/>
-        <div className="justify-content-center col-8">
-        <Grid className="grid-container">
+        <div className="grid-container">
+        <Grid>
            {cards ? cards : ""}
         </Grid>
         {heroes.length<=0 && <h2 className="text-center">No results found</h2>}

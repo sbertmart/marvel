@@ -17,23 +17,24 @@ const Form = (props) => {
     const [userPassword, setUserPassword] = useState("")
     const [passError, setPassError] = useState(false);
     const [logIn, setLogIn] = useState(false);
+    const [noExiste, setNoExiste] = useState(false);
     const [logged, setLogged] = useState(getDataFromLS("logged"))
 
 
     const handleLogIn = (e) => {
         e.preventDefault();
+        setLogIn(false);
+        setNoExiste(false);
         let user = {
             userName,
             userPassword
         }
-        const found = users.filter(signed => signed.userName === user.userName && signed.userPassword === user.userPassword);
-        setLogIn(found.length > -1);
-
-        if(logIn) {
-            setLogged(user);
-            localStorage.setItem("logged", JSON.stringify(logged));
-        }
-
+       let found = [];
+       found = users.filter((u) => (u.userName === user.userName && u.userPassword === user.userPassword));
+       console.log(found);
+       setNoExiste(found.length === 0); 
+       setLogIn(found.length > 0);
+       if (found.length > 0) {setLogged(user);}
     }
 
     const handleSignIn = (e) => {
@@ -42,23 +43,18 @@ const Form = (props) => {
             userName,
             userPassword
         }
-        setPassError(userPassword.length <= 5);
-        setLogIn(userPassword.length >= 5)
+        setPassError(userPassword.length <= 4);
+        setLogIn(userPassword.length > 4)
         if (passError === false) {
         setUsers([...users,user])};
         setLogged(user);
-        localStorage.setItem("logged", JSON.stringify(logged));
     }
     
     useEffect(() => {
 
     localStorage.setItem("users", JSON.stringify(users));
-    },[users])
-
-    useEffect(()  => {
-
     localStorage.setItem("logged", JSON.stringify(logged));
-    })
+    },[users, logged])
 
 
     
@@ -73,8 +69,11 @@ const Form = (props) => {
                     <label>Password</label>
                     <input name="password" value={userPassword} type="password" onChange={(e)=>{setUserPassword(e.target.value)}}></input>
                     <input className="submit" type="submit" value="Log In"></input>
-                    {logIn && <div className="alert">
+                    {noExiste && <div className="alert">
                         <h3>The username doesn't exist or the password is wrong</h3>
+                    </div>}
+                    {logIn > 0 && <div className="success2">
+                        <h3>Now you're ready to enjoy our database</h3>
                     </div>}
                 
                 </form>

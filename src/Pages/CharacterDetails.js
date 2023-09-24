@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react"
 import { useParams } from "react-router-dom";
 import { fetchHero } from "../utils/fetchFunction"
+import { Link } from "react-router-dom"
 
 const CharacterDetails = () => {
     let {id} = useParams();
@@ -17,7 +18,7 @@ const CharacterDetails = () => {
 
     return (
         <div>
-            <div className="character-details d-flex justify-content-center">
+            <div className="character-details">
                 <div className="character-details-img">
                 <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt="" />
                 </div>
@@ -34,6 +35,7 @@ const CharacterDetails = () => {
                             {hero.series.items.map(serie => <li key={Math.random() * 1000}>{serie.name}</li>)}
                         </ul>
                     </div>
+                    <Link to="/database"><button className="submit2">BACK TO THE DATABASE</button></Link>
                 </div>
             </div>
         </div>
